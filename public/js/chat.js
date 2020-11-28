@@ -15,7 +15,8 @@ socket.on('message', (message) => {
     console.log(message);
 
     const HTML = Mustache.render(messageTemplate, {
-        message
+        message: message.text,
+        createdAt: moment(message.createdAt).format('HH:mm')
     });
     $messages.insertAdjacentHTML('beforeend', HTML);
 });

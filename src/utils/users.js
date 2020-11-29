@@ -15,7 +15,7 @@ const addUser = ({id, username, room}) => {
     }
 
     //Check for existing user
-    const existingUser = users.find((user) => user.room === room && user.username === username);
+    const existingUser = users.find(user => user.room === room && user.username === username);
 
     //Validate username
     if(existingUser) {
@@ -32,11 +32,19 @@ const addUser = ({id, username, room}) => {
 };
 
 const removeUser = (id) => {
-    const index = users.findIndex((user) => user.id === id);
+    const index = users.findIndex(user => user.id === id);
 
     if (index !== -1) {
         return users.splice(index, 1)[0];
     }
+};
+
+const getUser = (id) => {
+    return users.find(user => user.id === id);
+};
+
+const getUsersInRoom = (room) => {
+    return users.filter(user => user.room === room.trim().toLowerCase());
 };
 
 addUser({
@@ -45,6 +53,9 @@ addUser({
     room: 'central park'
 })
 
-const removedUser = removeUser(22);
-console.log(removedUser);
-console.log(users);
+module.exports = {
+    addUser,
+    removeUser,
+    getUser,
+    getUsersInRoom
+}
